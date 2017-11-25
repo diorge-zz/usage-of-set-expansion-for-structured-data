@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import Binarizer
@@ -77,3 +78,18 @@ def sparse_binomial_generation(instances, dimensions, n_classes=2,
     final_matrix = base_matrix * weights_matrix
 
     return pd.DataFrame(final_matrix).assign(target=base.target)
+
+
+def main():
+    np.random.seed(42)
+    bernoulli_generation(10000, 200, 50, density=0.3).to_csv(os.path.join('data', 'densebinary.csv'))
+    bernoulli_generation(10000, 200, 50, density=0.05).to_csv(os.path.join('data', 'sparsebinary.csv'))
+    sparse_binomial_generation(10000, 200, 30, density=0.3, p_mean=0.4).to_csv(os.path.join('data', 'denseinteger.csv'))
+    sparse_binomial_generation(10000, 200, 30, density=0.05, p_mean=0.5).to_csv(os.path.join('data', 'sparseinteger.csv'))
+
+    bernoulli_generation(100000, 300, 200, density=0.05).to_csv(os.path.join('data', 'hugebinary.csv'))
+    sparse_binomial_generation(100000, 300, 100, density=0.05, p_mean=0.5).to_csv(os.path.join('data', 'hugeinteger.csv'))
+
+
+if __name__ == '__main__':
+    main()
