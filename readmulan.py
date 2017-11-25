@@ -23,6 +23,7 @@ def main():
                 'yeast-test',
                 'yeast-train')
     CLASSES = ('birds', 'CAL500', 'emotions', 'mediamill', 'yeast')
+    TARGET_PATH = 'data'
 
     classes = {}
     for cls in CLASSES:
@@ -44,8 +45,8 @@ def main():
         data = df.drop(classes[actualset], axis=1)
         labels = df[classes[actualset]]
 
-        data.to_csv(os.path.join(DATA_PATH, ds + '_X.csv'), index=False)
-        labels.to_csv(os.path.join(DATA_PATH, ds + '_Y.csv'), index=False)
+        data.to_csv(os.path.join(TARGET_PATH, ds + '_X.csv'), index=False)
+        labels.to_csv(os.path.join(TARGET_PATH, ds + '_Y.csv'), index=False)
 
     # also adds birds dataset concatenating the train and test sets
     birds = pd.concat([
@@ -59,8 +60,8 @@ def main():
     labels = birds[classes['birds']]
     dframes['birds'] = birds
 
-    data.to_csv(os.path.join(DATA_PATH, 'birds_X.csv'), index=False)
-    labels.to_csv(os.path.join(DATA_PATH, 'birds_Y.csv'), index=False)
+    data.to_csv(os.path.join(TARGET_PATH, 'birds_X.csv'), index=False)
+    labels.to_csv(os.path.join(TARGET_PATH, 'birds_Y.csv'), index=False)
 
 
 if __name__ == '__main__':
