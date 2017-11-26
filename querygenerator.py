@@ -75,12 +75,12 @@ def cnae():
     RATIO_OF_SAMPLE = 0.4
     MAXIMUM_SAMPLE_SIZE = 12
 
-    df = pd.read_csv(os.path.join(DATA_PATH, 'CNAE-9.data'))
+    df = pd.read_csv(os.path.join(DATA_PATH, 'CNAE-9.data'), header=None)
     queries = []
     targets = []
 
-    for cls in df['0'].unique():
-        valid_indices = df.index[df['0'] == cls].tolist()
+    for cls in df[0].unique():
+        valid_indices = df.index[df[0] == cls].tolist()
         size = len(valid_indices)
 
         if size >= MINIMUM_EXAMPLE_COUNT:
